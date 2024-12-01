@@ -1,0 +1,623 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <time.h>
+
+#define size 2
+
+void sTart();
+void stepBet();
+void stepBetLoop();
+    int bet,Bet;
+    int startingCap = 50000;
+	int capital;
+void bankeR();
+	int cardBank[size];
+    int cB_init;
+    int cB_plus;
+    int cB_sum = 0;
+    int cB_eq = 0;
+    int cB_total=0;
+int choice;
+void playeR();
+	int cardPlay[size];
+    int cP_init;
+    int cP_plus;
+	int cP_sum = 0;
+    int cP_eq = 0;
+    int cP_total=0;
+void generating();
+void battle();
+void playerReset();
+void resultPlayerBattle();
+void betChoice();
+	int betRep;
+	int betOppo;
+void firstPlayer();
+	int firstPlay[size];
+    int fP_init;
+    int fP_plus;
+	int fP_sum = 0;
+	int fP_eq = 0;
+	int fP_total = 0;
+void secondPlayer();
+	int secondPlay[size];
+    int sP_init;
+    int sP_plus;
+	int sP_sum = 0;
+	int sP_eq = 0;
+	int sP_total = 0;
+void resultBet();
+	int reward = 0;
+void design();
+
+int main() {
+    srand(time(0));
+    design();
+    usleep(400000);
+    system("cls");
+	sTart();
+	    switch(choice){
+        case 1:
+        battle();
+        break;
+
+        case 2:
+        betChoice();
+        break;
+
+        default:
+        printf("\n\n\t\tTry Again!\n");
+        sTart();
+        break;
+    return 0;
+}
+}
+
+// definition of functions
+
+void sTart(){
+    system("COLOR E");
+usleep(300000);
+     printf("||=================================||\n");
+usleep(300000);
+     printf("||                                 ||\n");
+usleep(300000);
+     printf("\n\tARE YOU FEELING LUCKY?\n");
+usleep(300000);
+     printf("||                                 ||\n");
+usleep(300000);
+     printf("||=================================||\n");
+     printf("\nIf YES or NO just press 'ENTER'\n\n\n");
+    getch();
+usleep(300000);
+    printf("||=================================||\n");
+usleep(300000);
+    printf("||                                 ||\n");
+    printf("||                                 ||\n");
+    printf("||                                 ||\n");
+usleep(300000);
+    printf("\tWHAT ROLE DO YOU WANT?\n");
+usleep(300000);
+    printf("\n\n\t[1] PLAYER\n\t[2] SPECTATOR\n\t\n");
+usleep(300000);
+    printf("||                                 ||\n");
+usleep(300000);
+    printf("||                                 ||\n");
+    printf("||                                 ||\n");
+usleep(300000);
+    printf("||=================================||\n");
+    printf("\tWhat's your choice?: ");
+    scanf("%d",&choice);
+}
+
+void stepBet(){
+    printf("\n\n\n");
+usleep(300000);
+    printf("||=========================================||\n");
+usleep(300000);
+	printf("\n\tYOUR STARTING CAPITAL IS %d\n\n",startingCap);
+    usleep(300000);
+    printf("||=========================================||\n\n");
+usleep(300000);
+    printf("\n\n\tHow much would you like to bet:\t");
+    scanf("%d",&bet);
+    capital = startingCap - bet;
+    stepBetLoop();
+}
+
+void stepBetLoop(){
+    if(bet <= startingCap){
+        printf("\n\n\n");
+usleep(300000);
+        printf("||===========================||\n");
+usleep(300000);
+        printf("\n\tGOODLUCK PLAYER!\n\n");
+usleep(300000);
+        printf("||===========================||\n\n\n");
+        printf("Press ''ENTER'' to start the game!\n");
+        getch();
+		}
+    else{
+        printf("\nNOT ENOUGH BALANCE");
+        getch();
+        for(Bet=startingCap ; bet > Bet ; Bet++){
+            printf("\n\nTry Again!\n");
+            getch();
+            system("cls");
+            stepBet();
+            getch();
+		}
+    }
+    getch();
+    system("cls");
+}
+
+void generating(){
+    usleep(300000);
+	printf("\n\nDealer is generating cards right now");
+usleep(500000);
+	 printf(".");
+usleep(500000);
+	    printf(".");
+usleep(500000);
+	     printf(".");
+usleep(500000);
+	        printf(".");
+usleep(500000);
+	            printf(".");
+
+}
+
+void battle(){
+	stepBet();
+    generating();
+    playeR();
+    getch();
+    system("cls");
+    getch();
+    bankeR();
+    getch();
+}
+
+void playeR(){
+usleep(300000);
+	printf("\n\n\tPLAYER'S CARDS");
+usleep(500000);
+
+    for(cP_init = 0 ; cP_init < size ; cP_init++){
+        cardPlay[cP_init] = rand()%9+1;
+        printf("\n\n\t%4d\n",cardPlay[cP_init]);
+usleep(500000);
+	}
+
+	for(cP_init = 0 ; cP_init < size ; cP_init++){
+        cP_sum = cP_sum + cardPlay[cP_init];
+	}
+
+	for (cP_init = 1 ; cP_init < size ; cP_init++){
+		if (cP_sum > 5 && cP_sum <= 9){
+			printf("\n\n\tPLAYER'S TOTAL:%4d",cP_sum);
+			printf("\n\nPress ''ENTER'' to procced!\n\n");
+
+			cP_total += cP_sum;
+		}
+		else{
+            printf("\n\n");
+            printf("||==============================================================||\n");
+usleep(300000);
+            printf("||                                                              ||\n");
+usleep(300000);
+  			printf("\n\n\tWould you like another card for 1000 coins?\n");
+  			 printf("\n\t\t\t[1] YES\n\t\t\t[2] NO\n");
+usleep(300000);
+            printf("||                                                              ||\n");
+usleep(300000);
+            printf("||                                                              ||\n");
+usleep(300000);
+            printf("||==============================================================||\n\n\n");
+usleep(300000);
+  			printf ("\n\n\t\tWhat's your choice: ");
+   			scanf("%d",&choice);
+usleep(400000);
+   			printf("\n\n\tYour account currently has %d coins.",capital);
+				switch(choice){
+	       			case 1 :
+	       				capital = capital - 1000;
+	       				cP_plus = rand()%9+1;
+	       				generating();
+            			printf("\n\n\tYour new card is: %d.\n",cP_plus);
+usleep(400000);
+            			cP_eq = cP_eq + cP_plus + cP_sum ;
+            			playerReset();
+usleep(400000);
+            			printf("\n\n\tYou have %d coins left in your account.\n",capital);
+            			usleep(500000);
+					break;
+
+					case 2 :
+						cP_eq = cP_eq + cP_sum ;
+						playerReset();
+usleep(400000);
+					break;
+				}
+		printf("\n\n\tPLAYER'S TOTAL:%d\n",cP_eq);
+		printf("\n\tPress ''ENTER to show banker's card\n");
+		cP_total += cP_eq;
+usleep(400000);
+    	}
+	}
+
+	for (cP_init = 1 ; cP_init < size ; cP_init++){
+	if (cP_total == 9){
+usleep(400000);
+        printf("||==============================================================||\n");
+usleep(400000);
+		printf("\n\n\t\tLUCKY 9 ! ! !\n\n\t\tCONGRATULATIONS ! ! !\n\n");
+usleep(400000);
+        printf("||==============================================================||\n");
+		resultPlayerBattle();
+		break;
+		}
+usleep(400000);
+	}
+
+}
+
+void playerReset(){
+	if (cP_eq > 9 && cP_eq < 20){
+    	cP_eq = cP_eq - 10 ;
+	}
+	else if(cP_eq>=20){
+    	cP_eq = cP_eq - 20 ;
+	}
+}
+
+void bankeR(){
+usleep(500000);
+	printf("\n\n\tBanker's cards: ");
+    for(cB_init = 0 ; cB_init < size ; cB_init++){
+        cardBank[cB_init] = rand()%9+1;
+        printf("\n\n\t%4d",cardBank[cB_init]);
+        usleep(400000);
+	}
+
+   for(cB_init = 0 ; cB_init < size ; cB_init++){
+        cB_sum += cardBank[cB_init];
+	}
+
+	for (cB_init = 1 ; cB_init < size ; cB_init++){
+		if (cP_total == 9){
+			break;
+		}
+		else if(cB_sum>5 && cB_sum <= 9){
+			printf("\n\n\tBANKER'S TOTAL:%d\n\n",cB_sum);
+			usleep(400000);
+			cB_total += cB_sum;
+    	}
+    	else{
+    		cB_plus = rand()%9+1;
+       		printf("\n\n\tThe banker's hirit card is %d.\n\n",cB_plus);
+       		cB_eq = cB_eq + cB_plus + cB_sum ;
+       			if (cB_eq > 9 && cB_eq < 20){
+					cB_eq = cB_eq - 10;
+				}
+				else if(cB_eq>=20){
+    				cB_eq = cB_eq - 20 ;
+				}
+usleep(500000);
+				printf("\n\tBANKER'S TOTAL:%d\n\n",cB_eq);
+		}
+		cB_total += cB_eq;
+			if (cB_total == 9){
+         printf("||===============================||\n");
+usleep(500000);
+		 printf("\n\tLUCKY NINE!!!\n");
+usleep(500000);
+		 printf("||===============================||\n\n");
+usleep(500000);
+         printf("||========================================||\n");
+usleep(500000);
+		 printf("\n\tCONGRATULATIONS ! ! !\n");
+usleep(500000);
+	     printf("||========================================||\n");
+	}
+	getch();
+	resultPlayerBattle();
+	}
+	getch();
+	system("cls");
+}
+
+void resultPlayerBattle(){
+	system("cls");
+	if (cP_total==9){
+		printf("\n\n\tPLAYER WIN ! ! ! . . .\n\n");
+		reward = reward  + capital + bet * 2;
+		printf("\n\n\t\tYour account balance is %d\n",reward);
+		printf("\n\nPress ''ENTER'' to procced");
+	}
+	else if (cP_total>cB_total){
+		printf("\n\n\tPLAYER WIN ! ! ! . . .\n\n");
+		reward = reward  + capital + bet * 2;
+		printf("\n\n\tYour account balance is %d\n",reward);
+		printf("\n\nPress ''ENTER'' to procced");
+	}
+	else if (cP_total==cB_total){
+        usleep(500000);
+		printf("\n\n\tITS A DRAW\n");
+		reward = capital + bet ;
+		printf("\n\n\tYour account balance is %d\n",reward);
+		usleep(500000);
+		printf("\n\nPress ''ENTER'' to procced\n\n");
+	}
+	else{
+        usleep(500000);
+		printf("\n\n\tBANKER WIN . . .\n\n");
+		usleep(500000);
+		printf("\n\n\tYou Lost . . .\n\n");
+		reward = capital - bet;
+		usleep(500000);
+		printf("\n\n\tYour account balance is %d\n\n",reward);
+		usleep(500000);
+		printf("\n\nPress ''ENTER'' to procced!\n");
+	}
+	getch();
+}
+
+void betChoice(){
+    usleep(500000);
+    	printf("||=====================================================||\n");
+	usleep(500000);
+		printf("||                                                     ||\n");
+	usleep(500000);
+		printf("\n\tWho are you rooting for?\n\n\t\t[1] PLAYER 1\t\n\t\t[2] PLAYER 2\n\n");
+	usleep(500000);
+		printf("||                                                     ||\n");
+	usleep(500000);
+		printf("||=====================================================||\n\n");
+    usleep(500000);
+	printf("\n\t\tResponse: \t");
+	scanf("%d",&choice);
+	switch(choice){
+		case 1:
+			stepBet();
+		    stepBetLoop();
+			generating();
+	    	firstPlayer();
+	    	secondPlayer();
+	    		if (fP_total  == 9 ){
+					printf("\n\nPLAYER 1 WON ! ! ! . . .");
+					printf("\n\nCONGRATULATINS You Win ! ! ! . . .");
+					reward = reward  + capital + bet * 2;
+					printf("\n\nYour account balance is %d\n",reward);
+				}
+				else if(fP_total > sP_total) {
+					printf("\n\nPLAYER 1 WON ! ! ! . . .");
+					printf("\n\nCONGRATULATINS You Win ! ! ! . . .");
+					reward = reward  + capital + bet * 2;
+					printf("\n\nYour account balance is %d\n",reward);
+				}
+				else if (fP_total == sP_total){
+					printf("\n\nITS A DRAW");
+					reward = capital + bet ;
+					printf("\n\nYour account balance is %d\n",reward);
+				}
+				else {
+					printf("\n\nPLAYER 2 WIN . . .");
+					printf("\n\nYou Lost . . .");
+					reward = capital - bet;
+					printf("\n\nYour account balance is %d\n",reward);
+				}
+				break;
+
+				case 2:
+					stepBet();
+				    stepBetLoop();
+					generating();
+			    	firstPlayer();
+    				secondPlayer();
+    					if (sP_total  == 9 ){
+							printf("\n\n\tPLAYER 2 WON ! ! ! . . .");
+							printf("\n\nCONGRATULATINS You Win ! ! ! . . .");
+							reward = reward  + capital + bet * 2;
+							printf("\n\n\tYour account balance is %d\n",reward);
+						}
+						else if(sP_total > fP_total) {
+							printf("\n\nPLAYER 2 WON ! ! ! . . .");
+							printf("\n\nCONGRATULATINS You Win ! ! ! . . .");
+							reward = reward  + capital + bet * 2;
+							printf("\n\n\tYour account balance is %d\n",reward);
+						}
+						else if (sP_total == fP_total){
+							printf("\n\n\tITS A DRAW");
+							reward = capital + bet ;
+							printf("\n\n\tYour account balance is %d\n",reward);
+						}
+						else {
+							printf("\n\n\tPLAYER 1 WIN . . .");
+							printf("\n\n\tYou Lost . . .");
+							reward = capital - bet;
+							printf("\n\n\tYour account balance is %d\n",reward);
+						}
+
+						break;
+	}
+}
+
+void firstPlayer(){
+	printf("\n\tPLAYER 1'S CARDS: ");
+    for(fP_init = 0 ; fP_init < size ; fP_init++){
+        firstPlay[fP_init] = rand()%9+1;
+        printf("\n\n\t\t%d\n",firstPlay[fP_init]);
+       usleep(500000);
+	}
+
+   for(fP_init = 0 ; fP_init < size ; fP_init++){
+        fP_sum += firstPlay[fP_init];
+	}
+
+	for (fP_init = 1 ; fP_init < size ; fP_init++){
+		if (fP_total == 9){
+			break;
+		}
+		else if(fP_sum>5 && fP_sum <= 9){
+			printf("\n\nPLAYER 1'S TOTAL: %d\n",fP_sum);
+			usleep(500000);
+			fP_total += fP_sum;
+    	}
+    	else {
+    		fP_plus = rand()%9+1;
+       		printf("\n\nPlayer 1's hirit card is %d.\n",fP_plus);
+       		fP_eq = fP_eq + fP_plus + fP_sum ;
+       			if (fP_eq > 9 && fP_eq < 20){
+					fP_eq = fP_eq - 10;
+				}
+				else if(fP_eq>=20){
+    				fP_eq = cB_eq - 20 ;
+				}
+			usleep(500000);
+				printf("\nPLAYER 1'S TOTAL: %4d\n",fP_eq);
+		}
+		fP_total += fP_eq;
+			if (fP_total == 9){
+				printf("\n\nLUCKY NINE!!!");
+				printf("\n\nCONGRATULATIONS ! ! !");
+		}		
+	}
+usleep(500000);
+}
+
+void secondPlayer(){
+	printf("\n\n\tPLAYER 2'S CARDS: ");
+    for(sP_init = 0 ; sP_init < size ; sP_init++){
+        secondPlay[sP_init] = rand()%9+1;
+        printf("\n\n\t\t%d\n",secondPlay[sP_init]);
+      usleep(500000);
+	}
+
+   for(sP_init = 0 ; sP_init < size ; sP_init++){
+        sP_sum += secondPlay[sP_init];
+	}
+
+	for (sP_init = 1 ; sP_init < size ; sP_init++){
+		if (sP_total == 9){
+			break;
+		}
+		else if(sP_sum>5 && sP_sum <= 9){
+			printf("\n\n\tPLAYER 2'S TOTAL:%d\n",sP_sum);
+	usleep(500000);
+			sP_total += sP_sum;
+    	}
+    	else {
+    		sP_plus = rand()%9+1;
+       		printf("\n\nPlayer 2's hirit card is %d.\n",sP_plus);
+       		sP_eq = sP_eq + sP_plus + sP_sum ;
+       			if (sP_eq > 9 && sP_eq < 20){
+					sP_eq = sP_eq - 10;
+				}
+				else if(sP_eq>=20){
+    				sP_eq = sP_eq - 20 ;
+				}
+				usleep(500000);
+				printf("\nPLAYER 2'S TOTAL:%d\n",sP_eq);
+		}
+		sP_total += sP_eq;
+			if (sP_total == 9){
+		printf("\n\nLUCKY NINE!!!");
+		printf("\n\nCONGRATULATIONS ! ! !");
+	}
+	}
+	usleep(500000);
+}
+
+void design(){
+
+    system("color b");
+printf("\nPress ''ENTER'' to start the Game!\n\n\n\n\n\n\n\n\n");
+getch();
+printf("         @====================================================================================================================================================================================================================@\n");
+printf("         ||                                                                                                                                                                                                                  ||\n");
+printf("         ||                                                                                                                                                                                                                  ||\n");
+usleep(200000);
+printf("         ||        WWWWWWWW                            WWWWWWWW                lllllll                                                                                                tttt                                   ||\n");
+usleep(200000);
+printf("         ||        W::::::W                            W::::::W                l:::::l                                                                                             ttt:::t                                   ||\n");
+usleep(20000);
+printf("         ||        W::::::W                            W::::::W                l:::::l                                                                                             t:::::t                                   ||\n");
+usleep(200000);
+printf("         ||         W::::::W                           W::::::W                l:::::l                                                                                             t:::::t                                   ||\n");
+usleep(200000);
+printf("         ||          W:::::W           WWWWW           W:::::W eeeeeeeeeeee    l::::l     cccccccccccccccc   ooooooooooo      mmmmmmm    mmmmmmm       eeeeeeeeeeee         ttttttt:::::ttttttt       ooooooooooo            ||\n");
+usleep(200000);
+printf("         ||           W:::::W         W:::::W         W:::::Wee::::::::::::ee  l::::l   cc:::::::::::::::c oo:::::::::::oo  mm:::::::m  m:::::::mm   ee::::::::::::ee       t:::::::::::::::::t     oo:::::::::::oo          ||\n");
+usleep(200000);
+printf("         ||            W:::::W       W:::::::W       W:::::We::::::eeeee:::::eel::::l  c:::::::::::::::::co:::::::::::::::om::::::::::mm::::::::::m e::::::eeeee:::::ee     t:::::::::::::::::t    o:::::::::::::::o         ||\n");
+usleep(200000);
+printf("         ||             W:::::W     W:::::::::W     W:::::We::::::e     e:::::el::::l c:::::::cccccc:::::co:::::ooooo:::::om::::::::::::::::::::::me::::::e     e:::::e     tttttt:::::::tttttt    o:::::ooooo:::::o         ||\n");
+usleep(200000);
+printf("         ||              W:::::W   W:::::W:::::W   W:::::W e:::::::eeeee::::::el::::l c::::::c     ccccccco::::o     o::::om:::::mmm::::::mmm:::::me:::::::eeeee::::::e           t:::::t          o::::o     o::::o         ||\n");
+usleep(200000);
+printf("         ||               W:::::W W:::::W W:::::W W:::::W  e:::::::::::::::::e l::::l c:::::c             o::::o     o::::om::::m   m::::m   m::::me:::::::::::::::::e            t:::::t          o::::o     o::::o         ||\n");
+usleep(200000);
+printf("         ||                W:::::W:::::W   W:::::W:::::W   e::::::eeeeeeeeeee  l::::l c:::::c             o::::o     o::::om::::m   m::::m   m::::me::::::eeeeeeeeeee             t:::::t          o::::o     o::::o         ||\n");
+usleep(200000);
+printf("         ||                 W:::::::::W     W:::::::::W    e:::::::e           l::::l c::::::c     ccccccco::::o     o::::om::::m   m::::m   m::::me:::::::e                      t:::::t    tttttto::::o     o::::o         ||\n");
+usleep(200000);
+printf("         ||                  W:::::::W       W:::::::W     e::::::::e         l::::::lc:::::::cccccc:::::co:::::ooooo:::::om::::m   m::::m   m::::me::::::::e                     t::::::tttt:::::to:::::ooooo:::::o         ||\n");
+usleep(200000);
+printf("         ||                   W:::::W         W:::::W       e::::::::eeeeeeee l::::::l c:::::::::::::::::co:::::::::::::::om::::m   m::::m   m::::m e::::::::eeeeeeee             tt::::::::::::::to:::::::::::::::o         ||\n");
+usleep(200000);
+printf("         ||                    W:::W           W:::W         ee:::::::::::::e l::::::l  cc:::::::::::::::c oo:::::::::::oo m::::m   m::::m   m::::m  ee:::::::::::::e               tt:::::::::::tt oo:::::::::::oo          ||\n");
+usleep(200000);
+printf("         ||                     WWW             WWW            eeeeeeeeeeeeee llllllll    cccccccccccccccc   ooooooooooo   mmmmmm   mmmmmm   mmmmmm    eeeeeeeeeeeeee                 ttttttttttt     ooooooooooo            ||\n");
+printf("         ||                                                                                                                                                                                                                  ||\n");
+printf("         ||                                                                                                                                                                                                                  ||\n");
+printf("         ||                                                                                                                                                                                                                  ||\n");
+printf("         ||                                     LLLLLLLLLLL                                                  kkkkkkkk                                              999999999        !!!                                      ||\n");
+usleep(200000);
+printf("         ||                                     L:::::::::L                                                  k::::::k                                            99:::::::::99     !!:!!                                     ||\n");
+usleep(200000);
+printf("         ||                                     L:::::::::L                                                  k::::::k                                          99:::::::::::::99   !:::!                                     ||\n");
+usleep(200000);
+printf("         ||                                     LL:::::::LL                                                  k::::::k                                         9::::::99999::::::9  !:::!                                     ||\n");
+usleep(200000);
+printf("         ||                                     L:::::L               uuuuuu    uuuuuu      cccccccccccccccc k:::::k    kkkkkkkyyyyyyy           yyyyyyy     9:::::9      9:::::9! !:::!                                     ||\n");
+usleep(200000);
+printf("         ||                                     L:::::L               u::::u    u::::u    cc:::::::::::::::c k:::::k   k:::::k  y:::::y         y:::::y      9:::::9      9:::::9  !:::!                                     ||\n");
+usleep(200000);
+printf("         ||                                     L:::::L               u::::u    u::::u   c:::::::::::::::::c k:::::k  k:::::k    y:::::y       y:::::y        9:::::99999::::::9   !:::!                                     ||\n");
+usleep(200000);
+printf("         ||                                     L:::::L               u::::u    u::::u  c:::::::cccccc:::::c k:::::k k:::::k      y:::::y     y:::::y          99::::::::::::::9   !:::!                                     ||\n");
+usleep(200000);
+printf("         ||                                     L:::::L               u::::u    u::::u  c::::::c     ccccccc k::::::k:::::k        y:::::y   y:::::y             99999::::::::9    !:::!                                     ||\n");
+usleep(200000);
+printf("         ||                                     L:::::L               u::::u    u::::u  c:::::c              k:::::::::::k          y:::::y y:::::y                   9::::::9     !:::!                                     ||\n");
+usleep(200000);
+printf("         ||                                     L:::::L               u::::u    u::::u  c:::::c              k:::::::::::k           y:::::y:::::y                   9::::::9      !!:!!                                     ||\n");
+usleep(200000);
+printf("         ||                                     L:::::L         LLLLLLu:::::uuuu:::::u  c::::::c     ccccccc k:::::::k:::::k          y:::::::::y                   9::::::9        !!!                                      ||\n");
+usleep(200000);
+printf("         ||                                     LL:::::::LLLLLLLLL:::::Lu:::::::::::::::uuc:::::::cccccc:::::ck::::::k k:::::k         y:::::::y                   9::::::9                                                  ||\n");
+usleep(200000);
+printf("         ||                                     L::::::::::::::::::::::L u:::::::::::::::u c:::::::::::::::::ck::::::k  k:::::k         y:::::y                   9::::::9          !!!                                      ||\n");
+usleep(200000);
+printf("         ||                                     L::::::::::::::::::::::L  uu::::::::uu:::u  cc:::::::::::::::ck::::::k   k:::::k       y:::::y                   9::::::9          !!:!!                                     ||\n");
+usleep(200000);
+printf("         ||                                     LLLLLLLLLLLLLLLLLLLLLLLL    uuuuuuuu  uuuu    cccccccccccccccckkkkkkkk    kkkkkkk     y:::::y                   99999999            !!!                                      ||\n");
+usleep(200000);
+printf("         ||                                                                                                                          y:::::y                                                                                 ||\n");
+usleep(200000);
+printf("         ||                                                                                                                         y:::::y                                                                                  ||\n");
+usleep(200000);
+printf("         ||                                                                                                                        y:::::y                                                                                   ||\n");
+usleep(20000);
+printf("         ||                                                                                                                       y:::::y                                                                                    ||\n");
+usleep(200000);
+printf("         ||                                                                                                                      yyyyyyy                                                                                     ||\n");
+
+printf("         ||                                                                                                                                                                                                                  ||\n");
+printf("         ||                                                                                                                                                                                                                  ||\n");
+printf("         @====================================================================================================================================================================================================================@\n");
+
+}
